@@ -1,2 +1,1 @@
-// Change this only if your backend runs on another port or deployed URL.
-const API_BASE_URL = localStorage.getItem('API_BASE_URL') || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://your-render-backend-url.onrender.com/api';
