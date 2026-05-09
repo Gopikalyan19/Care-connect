@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard — NAU Care Connect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Lora', 'Georgia', 'serif'],
+            sans:  ['Geist', 'sans-serif'],
+          },
+          colors: {
+            paper: '#f6f4f1',
+            ink:   '#141210',
+            sage: {
+              DEFAULT: '#3d6b52',
+              light:   '#eaf2ec',
+            },
+            warm: {
+              DEFAULT: '#7b746e',
+              border:  '#e4dfd9',
+            },
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(12px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-1': 'fadeUp 0.45s 0.05s ease both',
+            'fade-2': 'fadeUp 0.45s 0.13s ease both',
+            'fade-3': 'fadeUp 0.45s 0.20s ease both',
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-paper font-sans font-light antialiased min-h-screen text-ink">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 border-b border-warm-border bg-paper/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-[58px] flex items-center justify-between">
+      <a href="../index.html" class="font-serif text-[1.05rem] tracking-tight text-ink no-underline">
+        NAU <span class="text-sage">Care</span> Connect
+      </a>
+      <div class="flex items-center gap-3">
+        <!-- User badge -->
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-sage-light border border-sage/20 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 stroke-sage" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <span id="userLabel" class="text-[0.82rem] text-warm hidden sm:inline"></span>
+        </div>
+        <button
+          onclick="logout()"
+          class="text-[0.8rem] text-warm border border-warm-border px-3.5 py-1.5 rounded-full hover:border-red-200 hover:text-red-500 transition-all duration-200"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-6 animate-fade-1">
+    <p class="flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.14em] uppercase text-sage mb-3">
+      <span class="block w-5 h-px bg-sage shrink-0"></span>
+      Student Portal
+    </p>
+    <h1 class="font-serif font-normal text-2xl sm:text-3xl leading-tight tracking-tight">
+      My <em class="text-sage not-italic">Dashboard</em>
+    </h1>
+    <p class="mt-1.5 text-[0.88rem] text-warm">Submit a support request or track your existing ones.</p>
+  </div>
+
+  <!-- MAIN GRID -->
+  <main class="max-w-6xl mx-auto px-5 sm:px-8 pb-16 grid lg:grid-cols-3 gap-6">
+
+    <!-- ── LEFT: New Request Form ── -->
+    <section class="lg:col-span-1 animate-fade-2">
+      <div class="bg-white border border-warm-border rounded-2xl shadow-sm overflow-hidden">
+
+        <!-- Section header -->
+        <div class="px-6 pt-6 pb-5 border-b border-warm-border">
+          <h2 class="font-serif font-normal text-[1.05rem] text-ink">New Support Request</h2>
+          <p class="text-[0.78rem] text-warm mt-0.5">Tell us what you need help with</p>
+        </div>
+
+        <form id="requestForm" class="px-6 py-6 flex flex-col gap-4">
+
+          <!-- Category -->
+          <div class="flex flex-col gap-1.5">
+            <label for="category" class="text-[0.8rem] font-medium text-ink">Support Category</label>
+            <div class="relative">
+              <select id="category" name="category"
+                class="w-full appearance-none bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.86rem] text-ink focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200 cursor-pointer">
+                <option value="peer">Peer Consultation</option>
+                <option value="selfcare">Self-Care Support</option>
+                <option value="psychologist">Psychologist Consultation</option>
+                <option value="psychiatrist">Psychiatrist Consultation</option>
+              </select>
+              <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-warm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Concern Type -->
+          <div class="flex flex-col gap-1.5">
+            <label for="concern_type" class="text-[0.8rem] font-medium text-ink">Concern Type</label>
+            <input id="concern_type" name="concern_type" type="text"
+              placeholder="e.g. Anxiety, Academic Stress"
+              class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.86rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+            >
+          </div>
+
+          <!-- Description -->
+          <div class="flex flex-col gap-1.5">
+            <label for="description" class="text-[0.8rem] font-medium text-ink">
+              Description <span class="text-sage">*</span>
+            </label>
+            <textarea id="description" name="description" rows="3"
+              placeholder="Briefly describe your concern…"
+              required
+              class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.86rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200 resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Date + Time -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label for="preferred_date" class="text-[0.8rem] font-medium text-ink">
+                Date <span class="text-sage">*</span>
+              </label>
+              <input id="preferred_date" name="preferred_date" type="date" required
+                class="w-full bg-paper border border-warm-border rounded-xl px-3 py-3 text-[0.86rem] text-ink focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+              >
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="preferred_time" class="text-[0.8rem] font-medium text-ink">
+                Time <span class="text-sage">*</span>
+              </label>
+              <input id="preferred_time" name="preferred_time" type="time" required
+                class="w-full bg-paper border border-warm-border rounded-xl px-3 py-3 text-[0.86rem] text-ink focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+              >
+            </div>
+          </div>
+
+          <!-- Mode + Urgency -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label for="mode" class="text-[0.8rem] font-medium text-ink">Mode</label>
+              <div class="relative">
+                <select id="mode" name="mode"
+                  class="w-full appearance-none bg-paper border border-warm-border rounded-xl px-3 py-3 text-[0.86rem] text-ink focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200 cursor-pointer">
+                  <option value="online">Online</option>
+                  <option value="offline">Offline</option>
+                </select>
+                <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-warm">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="urgency_level" class="text-[0.8rem] font-medium text-ink">Urgency</label>
+              <div class="relative">
+                <select id="urgency_level" name="urgency_level"
+                  class="w-full appearance-none bg-paper border border-warm-border rounded-xl px-3 py-3 text-[0.86rem] text-ink focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200 cursor-pointer">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+                <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-warm">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Consent -->
+          <label class="flex items-start gap-2.5 cursor-pointer select-none">
+            <input type="checkbox" required
+              class="mt-0.5 accent-sage w-4 h-4 shrink-0 cursor-pointer"
+            >
+            <span class="text-[0.8rem] text-warm leading-relaxed">
+              I consent to submit this request and understand it will be reviewed by the support team.
+            </span>
+          </label>
+
+          <!-- Submit -->
+          <div class="flex flex-col gap-2.5 pt-1">
+            <button type="submit" id="submitBtn"
+              class="w-full bg-ink text-white text-[0.86rem] font-medium py-3.5 rounded-full hover:bg-sage transition-all duration-200 hover:-translate-y-px active:translate-y-0 flex items-center justify-center gap-2"
+            >
+              <span id="submitText">Submit Request</span>
+              <svg id="submitSpinner" class="hidden w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </button>
+            <div id="msg" class="hidden text-[0.8rem] text-center px-4 py-2.5 rounded-xl"></div>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- ── RIGHT: My Requests ── -->
+    <section class="lg:col-span-2 animate-fade-3">
+      <div class="bg-white border border-warm-border rounded-2xl shadow-sm overflow-hidden">
+
+        <!-- Section header -->
+        <div class="px-6 pt-6 pb-5 border-b border-warm-border flex items-center justify-between">
+          <div>
+            <h2 class="font-serif font-normal text-[1.05rem] text-ink">My Requests</h2>
+            <p class="text-[0.78rem] text-warm mt-0.5">Your submitted support requests</p>
+          </div>
+          <button onclick="load()"
+            class="text-[0.78rem] text-warm border border-warm-border px-3 py-1.5 rounded-full hover:border-sage hover:text-sage transition-all duration-200 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+            </svg>
+            Refresh
+          </button>
+        </div>
+
+        <!-- Request list -->
+        <div id="requests" class="p-6">
+          <!-- Skeleton loader shown initially -->
+          <div id="skeleton" class="flex flex-col gap-3">
+            <div class="h-20 bg-paper rounded-xl animate-pulse"></div>
+            <div class="h-20 bg-paper rounded-xl animate-pulse"></div>
+            <div class="h-20 bg-paper rounded-xl animate-pulse"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-warm-border">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-5 text-center text-[0.75rem] text-warm">
+      © 2026 NAU Care Connect · Student Wellbeing Platform
+    </div>
+  </footer>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script>
+    requireAuth();
+    fillUserLabel();
+
+    // ── Helpers ──
+    const msg           = document.getElementById('msg');
+    const submitBtn     = document.getElementById('submitBtn');
+    const submitText    = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+    const requestForm   = document.getElementById('requestForm');
+    const requestsEl    = document.getElementById('requests');
+    const skeleton      = document.getElementById('skeleton');
+
+    function showMsg(text, isError = false) {
+      msg.textContent = text;
+      msg.className = `text-[0.8rem] text-center px-4 py-2.5 rounded-xl ${
+        isError
+          ? 'bg-red-50 text-red-600 border border-red-100'
+          : 'bg-sage-light text-sage border border-sage/20'
+      }`;
+      msg.classList.remove('hidden');
+    }
+
+    function setLoading(loading) {
+      submitBtn.disabled = loading;
+      submitText.textContent = loading ? 'Submitting…' : 'Submit Request';
+      submitSpinner.classList.toggle('hidden', !loading);
+    }
+
+    // ── Urgency badge colour ──
+    function urgencyBadge(level) {
+      const map = {
+        high:   'bg-red-50 text-red-600 border-red-100',
+        medium: 'bg-amber-50 text-amber-600 border-amber-100',
+        low:    'bg-sage-light text-sage border-sage/20',
+      };
+      return map[level] || map.low;
+    }
+
+    // ── Status badge colour ──
+    function statusBadge(status) {
+      const map = {
+        pending:   'bg-amber-50 text-amber-600 border-amber-100',
+        approved:  'bg-sage-light text-sage border-sage/20',
+        completed: 'bg-blue-50 text-blue-600 border-blue-100',
+        rejected:  'bg-red-50 text-red-600 border-red-100',
+      };
+      const key = (status || '').toLowerCase();
+      return map[key] || 'bg-paper text-warm border-warm-border';
+    }
+
+    // ── Category label ──
+    function categoryLabel(cat) {
+      const map = {
+        peer:          'Peer Consultation',
+        selfcare:      'Self-Care Support',
+        psychologist:  'Psychologist Consultation',
+        psychiatrist:  'Psychiatrist Consultation',
+      };
+      return map[cat] || cat;
+    }
+
+    // ── Render request card ──
+    function renderCard(r) {
+      return `
+        <div class="border border-warm-border rounded-xl p-4 sm:p-5 hover:border-sage/30 hover:bg-sage-light/20 transition-all duration-200">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <p class="font-medium text-[0.88rem] text-ink">${r.request_code || '—'}</p>
+              <p class="text-[0.82rem] text-warm mt-0.5">${categoryLabel(r.category)}</p>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              ${r.urgency_level ? `<span class="text-[0.72rem] font-medium px-2.5 py-0.5 rounded-full border ${urgencyBadge(r.urgency_level)} capitalize">${r.urgency_level}</span>` : ''}
+              <span class="text-[0.72rem] font-medium px-2.5 py-0.5 rounded-full border ${statusBadge(r.status)} capitalize">${r.status || 'Pending'}</span>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-4 text-[0.78rem] text-warm flex-wrap">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              ${r.preferred_date || '—'}
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              ${r.preferred_time || '—'}
+            </span>
+            ${r.mode ? `<span class="flex items-center gap-1.5 capitalize">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              ${r.mode}
+            </span>` : ''}
+          </div>
+          ${r.description ? `<p class="mt-2.5 text-[0.8rem] text-warm/80 leading-relaxed line-clamp-2">${r.description}</p>` : ''}
+        </div>
+      `;
+    }
+
+    // ── Empty state ──
+    function renderEmpty() {
+      return `
+        <div class="flex flex-col items-center justify-center py-14 text-center">
+          <div class="w-12 h-12 bg-sage-light rounded-full flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 stroke-sage" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+          </div>
+          <p class="font-medium text-[0.9rem] text-ink">No requests yet</p>
+          <p class="text-[0.82rem] text-warm mt-1 max-w-[26ch]">Submit your first support request using the form.</p>
+        </div>
+      `;
+    }
+
+    // ── Load requests ──
+    async function load() {
+      skeleton.classList.remove('hidden');
+      try {
+        const data = await api('/support/my-requests');
+        skeleton.classList.add('hidden');
+        const cards = (data.requests || []);
+        requestsEl.innerHTML = '';
+        requestsEl.appendChild(skeleton);
+        if (cards.length === 0) {
+          skeleton.classList.add('hidden');
+          const empty = document.createElement('div');
+          empty.innerHTML = renderEmpty();
+          requestsEl.appendChild(empty);
+        } else {
+          skeleton.classList.add('hidden');
+          const list = document.createElement('div');
+          list.className = 'flex flex-col gap-3';
+          list.innerHTML = cards.map(renderCard).join('');
+          requestsEl.appendChild(list);
+        }
+      } catch (e) {
+        skeleton.classList.add('hidden');
+        const err = document.createElement('p');
+        err.className = 'text-[0.84rem] text-red-500 text-center py-8';
+        err.textContent = e.message || 'Failed to load requests.';
+        requestsEl.appendChild(err);
+      }
+    }
+
+    // ── Form submit ──
+    requestForm.onsubmit = async (e) => {
+      e.preventDefault();
+      msg.classList.add('hidden');
+      setLoading(true);
+      try {
+        await api('/support/create', {
+          method: 'POST',
+          body: JSON.stringify(Object.fromEntries(new FormData(requestForm))),
+        });
+        showMsg('Request submitted successfully!');
+        requestForm.reset();
+        load();
+      } catch (err) {
+        showMsg(err.message || 'Submission failed. Please try again.', true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  </script>
+</body>
+</html>

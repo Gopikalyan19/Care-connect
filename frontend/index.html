@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NAU Care Connect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Lora', 'Georgia', 'serif'],
+            sans: ['Geist', 'sans-serif'],
+          },
+          colors: {
+            paper: '#f6f4f1',
+            ink: '#141210',
+            sage: {
+              DEFAULT: '#3d6b52',
+              light: '#eaf2ec',
+              muted: '#6a9478',
+            },
+            warm: {
+              DEFAULT: '#7b746e',
+              border: '#e4dfd9',
+            },
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(16px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-1':     'fadeUp 0.5s 0.05s ease both',
+            'fade-2':     'fadeUp 0.5s 0.13s ease both',
+            'fade-3':     'fadeUp 0.5s 0.22s ease both',
+            'fade-4':     'fadeUp 0.5s 0.30s ease both',
+            'fade-panel': 'fadeUp 0.5s 0.18s ease both',
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-paper text-ink font-sans font-light antialiased min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 border-b border-warm-border bg-paper/80 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 h-[58px] flex items-center justify-between">
+
+      <a href="#" class="font-serif text-[1.05rem] tracking-tight text-ink no-underline">
+        NAU <span class="text-sage">Care</span> Connect
+      </a>
+
+      <div class="flex items-center gap-1.5">
+        <a href="pages/login.html"
+           class="text-warm text-[0.82rem] font-normal px-3.5 py-2 rounded-full hover:text-ink transition-colors duration-200 no-underline">
+          Login
+        </a>
+        <a href="pages/register.html"
+           class="text-white bg-ink text-[0.82rem] font-normal px-4 py-2 rounded-full hover:bg-sage transition-colors duration-200 no-underline">
+          Register
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="max-w-5xl mx-auto px-5 sm:px-8">
+    <section class="grid md:grid-cols-2 gap-12 md:gap-16 items-center py-16 sm:py-20 md:py-24">
+
+      <!-- Copy -->
+      <div>
+        <p class="animate-fade-1 flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.14em] uppercase text-sage mb-5">
+          <span class="block w-5 h-px bg-sage shrink-0"></span>
+          Student Wellbeing Platform
+        </p>
+
+        <h1 class="animate-fade-2 font-serif font-normal leading-[1.1] tracking-tight text-4xl sm:text-5xl md:text-[3.2rem]">
+          Care, consultation &amp;<br>support —
+          <em class="text-sage not-italic">one place.</em>
+        </h1>
+
+        <p class="animate-fade-3 mt-5 text-[0.95rem] text-warm leading-relaxed max-w-[40ch]">
+          Register, select support, submit a request, book sessions and track your progress through role-based dashboards.
+        </p>
+
+        <div class="animate-fade-4 mt-7 flex flex-wrap gap-3 items-center">
+          <a href="pages/register.html"
+             class="no-underline bg-ink text-white text-[0.83rem] font-medium px-6 py-3 rounded-full hover:bg-sage transition-all duration-200 hover:-translate-y-px">
+            Get Started
+          </a>
+          <a href="pages/login.html"
+             class="no-underline text-warm text-[0.83rem] font-normal px-5 py-3 rounded-full border border-warm-border hover:border-warm hover:text-ink transition-all duration-200">
+            Login to account
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel -->
+      <div class="animate-fade-panel bg-white border border-warm-border rounded-2xl p-6 sm:p-7 shadow-sm">
+        <p class="font-serif text-[1rem] text-ink mb-5">Support Categories</p>
+
+        <div class="flex flex-col gap-2.5">
+
+          <!-- Item template × 4 -->
+          <div class="group flex items-center gap-3.5 px-4 py-3.5 bg-paper rounded-xl hover:bg-sage-light transition-colors duration-200 cursor-default">
+            <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-warm-border shrink-0">
+              <svg class="w-3.5 h-3.5 stroke-sage" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <span class="text-[0.87rem] text-ink">Peer Consultation</span>
+          </div>
+
+          <div class="group flex items-center gap-3.5 px-4 py-3.5 bg-paper rounded-xl hover:bg-sage-light transition-colors duration-200 cursor-default">
+            <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-warm-border shrink-0">
+              <svg class="w-3.5 h-3.5 stroke-sage" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </div>
+            <span class="text-[0.87rem] text-ink">Self-Care Support</span>
+          </div>
+
+          <div class="group flex items-center gap-3.5 px-4 py-3.5 bg-paper rounded-xl hover:bg-sage-light transition-colors duration-200 cursor-default">
+            <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-warm-border shrink-0">
+              <svg class="w-3.5 h-3.5 stroke-sage" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="text-[0.87rem] text-ink">Psychologist Consultation</span>
+          </div>
+
+          <div class="group flex items-center gap-3.5 px-4 py-3.5 bg-paper rounded-xl hover:bg-sage-light transition-colors duration-200 cursor-default">
+            <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-warm-border shrink-0">
+              <svg class="w-3.5 h-3.5 stroke-sage" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+              </svg>
+            </div>
+            <span class="text-[0.87rem] text-ink">Psychiatrist Consultation</span>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-warm-border mt-8">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 py-5 text-center text-[0.75rem] text-warm">
+      © 2026 NAU Care Connect · Student Wellbeing Platform
+    </div>
+  </footer>
+
+</body>
+</html>

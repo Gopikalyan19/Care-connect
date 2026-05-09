@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Register — NAU Care Connect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Lora', 'Georgia', 'serif'],
+            sans:  ['Geist', 'sans-serif'],
+          },
+          colors: {
+            paper: '#f6f4f1',
+            ink:   '#141210',
+            sage: {
+              DEFAULT: '#3d6b52',
+              light:   '#eaf2ec',
+            },
+            warm: {
+              DEFAULT: '#7b746e',
+              border:  '#e4dfd9',
+            },
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(14px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-1': 'fadeUp 0.45s 0.05s ease both',
+            'fade-2': 'fadeUp 0.45s 0.12s ease both',
+            'fade-3': 'fadeUp 0.45s 0.20s ease both',
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-paper font-sans font-light antialiased min-h-screen text-ink">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 border-b border-warm-border bg-paper/80 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 h-[58px] flex items-center justify-between">
+      <a href="../index.html" class="font-serif text-[1.05rem] tracking-tight text-ink no-underline">
+        NAU <span class="text-sage">Care</span> Connect
+      </a>
+      <a href="login.html"
+         class="text-warm text-[0.82rem] font-normal px-3.5 py-2 rounded-full hover:text-ink transition-colors duration-200 no-underline">
+        Login
+      </a>
+    </div>
+  </nav>
+
+  <!-- PAGE -->
+  <main class="max-w-5xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+    <div class="grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-16 items-start">
+
+      <!-- LEFT: Intro -->
+      <div class="md:pt-2 animate-fade-1">
+        <p class="flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.14em] uppercase text-sage mb-4">
+          <span class="block w-5 h-px bg-sage shrink-0"></span>
+          Get Started
+        </p>
+        <h1 class="font-serif font-normal text-3xl sm:text-4xl leading-[1.15] tracking-tight">
+          Create your<br><em class="text-sage not-italic">account.</em>
+        </h1>
+        <p class="mt-4 text-[0.92rem] text-warm leading-relaxed max-w-[34ch]">
+          Join the NAU Care Connect platform to access support, book sessions, and track your wellbeing journey.
+        </p>
+
+        <!-- Steps -->
+        <div class="mt-8 flex flex-col gap-4">
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-sage-light border border-sage/20 flex items-center justify-center shrink-0 mt-0.5">
+              <span class="text-sage text-[0.7rem] font-medium">1</span>
+            </div>
+            <div>
+              <p class="text-[0.85rem] font-medium text-ink">Fill in your details</p>
+              <p class="text-[0.8rem] text-warm mt-0.5">Personal info and credentials</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-sage-light border border-sage/20 flex items-center justify-center shrink-0 mt-0.5">
+              <span class="text-sage text-[0.7rem] font-medium">2</span>
+            </div>
+            <div>
+              <p class="text-[0.85rem] font-medium text-ink">Select your role</p>
+              <p class="text-[0.8rem] text-warm mt-0.5">Student, faculty, clinician, or admin</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-sage-light border border-sage/20 flex items-center justify-center shrink-0 mt-0.5">
+              <span class="text-sage text-[0.7rem] font-medium">3</span>
+            </div>
+            <div>
+              <p class="text-[0.85rem] font-medium text-ink">Access your dashboard</p>
+              <p class="text-[0.8rem] text-warm mt-0.5">Tailored to your role immediately</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form Card -->
+      <div class="animate-fade-2 bg-white border border-warm-border rounded-2xl shadow-sm overflow-hidden">
+
+        <!-- Card Header -->
+        <div class="px-6 sm:px-8 pt-7 pb-5 border-b border-warm-border">
+          <h2 class="font-serif font-normal text-[1.15rem] text-ink">Account Details</h2>
+          <p class="text-[0.8rem] text-warm mt-1">All fields marked <span class="text-sage">*</span> are required</p>
+        </div>
+
+        <!-- Form -->
+        <form id="form" class="px-6 sm:px-8 py-7 flex flex-col gap-6">
+
+          <!-- Section: Personal Info -->
+          <fieldset class="flex flex-col gap-3">
+            <legend class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-warm mb-1">Personal Information</legend>
+
+            <!-- Full Name -->
+            <div class="flex flex-col gap-1.5">
+              <label for="full_name" class="text-[0.8rem] font-medium text-ink">
+                Full Name <span class="text-sage">*</span>
+              </label>
+              <input
+                id="full_name" name="full_name" type="text"
+                placeholder="e.g. Alex Johnson"
+                required
+                class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.88rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+              >
+            </div>
+
+            <!-- Email + Phone -->
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="flex flex-col gap-1.5">
+                <label for="email" class="text-[0.8rem] font-medium text-ink">
+                  Email <span class="text-sage">*</span>
+                </label>
+                <input
+                  id="email" name="email" type="email"
+                  placeholder="you@university.edu"
+                  required
+                  class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.88rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+                >
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="phone" class="text-[0.8rem] font-medium text-ink">Phone</label>
+                <input
+                  id="phone" name="phone" type="tel"
+                  placeholder="+1 (555) 000-0000"
+                  class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.88rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+                >
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="flex flex-col gap-1.5">
+              <label for="password" class="text-[0.8rem] font-medium text-ink">
+                Password <span class="text-sage">*</span>
+              </label>
+              <div class="relative">
+                <input
+                  id="password" name="password" type="password"
+                  placeholder="Minimum 8 characters"
+                  required
+                  class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 pr-11 text-[0.88rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+                >
+                <button
+                  type="button"
+                  onclick="togglePwd()"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-warm hover:text-ink transition-colors"
+                  aria-label="Toggle password visibility"
+                >
+                  <svg id="eye-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Divider -->
+          <div class="border-t border-warm-border"></div>
+
+          <!-- Section: Role & Affiliation -->
+          <fieldset class="flex flex-col gap-3">
+            <legend class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-warm mb-1">Role &amp; Affiliation</legend>
+
+            <!-- Role -->
+            <div class="flex flex-col gap-1.5">
+              <label for="role" class="text-[0.8rem] font-medium text-ink">
+                Role <span class="text-sage">*</span>
+              </label>
+              <div class="relative">
+                <select
+                  id="role" name="role"
+                  required
+                  class="w-full appearance-none bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.88rem] text-ink focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200 cursor-pointer"
+                >
+                  <option value="" disabled selected>Select your role</option>
+                  <option value="student">Student</option>
+                  <option value="faculty">Faculty</option>
+                  <option value="member">Member</option>
+                  <option value="peer">Peer Supporter</option>
+                  <option value="selfcare">Self-Care Team</option>
+                  <option value="psychologist">Psychologist</option>
+                  <option value="psychiatrist">Psychiatrist</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-warm">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- College + Department -->
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="flex flex-col gap-1.5">
+                <label for="college" class="text-[0.8rem] font-medium text-ink">College / Organization</label>
+                <input
+                  id="college" name="college" type="text"
+                  placeholder="e.g. College of Health"
+                  class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.88rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+                >
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="department" class="text-[0.8rem] font-medium text-ink">Department</label>
+                <input
+                  id="department" name="department" type="text"
+                  placeholder="e.g. Psychology"
+                  class="w-full bg-paper border border-warm-border rounded-xl px-4 py-3 text-[0.88rem] text-ink placeholder:text-warm/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/10 transition-all duration-200"
+                >
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Submit -->
+          <div class="flex flex-col gap-3 pt-1">
+            <button
+              type="submit"
+              id="submit-btn"
+              class="w-full bg-ink text-white text-[0.88rem] font-medium py-3.5 rounded-full hover:bg-sage transition-all duration-200 hover:-translate-y-px active:translate-y-0 flex items-center justify-center gap-2"
+            >
+              <span id="btn-text">Create Account</span>
+              <svg id="btn-spinner" class="hidden w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </button>
+
+            <!-- Status message -->
+            <div id="msg" class="hidden text-[0.82rem] text-center px-4 py-2.5 rounded-xl"></div>
+
+            <p class="text-center text-[0.8rem] text-warm">
+              Already have an account?
+              <a href="login.html" class="text-sage font-medium hover:underline no-underline ml-1">Login</a>
+            </p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-warm-border mt-8">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 py-5 text-center text-[0.75rem] text-warm">
+      © 2026 NAU Care Connect · Student Wellbeing Platform
+    </div>
+  </footer>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script>
+    // Toggle password visibility
+    function togglePwd() {
+      const pwd = document.getElementById('password');
+      const icon = document.getElementById('eye-icon');
+      const isHidden = pwd.type === 'password';
+      pwd.type = isHidden ? 'text' : 'password';
+      icon.innerHTML = isHidden
+        ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+           <line x1="1" y1="1" x2="23" y2="23"/>`
+        : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+    }
+
+    // Form submit
+    const form       = document.getElementById('form');
+    const msg        = document.getElementById('msg');
+    const btnText    = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const submitBtn  = document.getElementById('submit-btn');
+
+    function showMsg(text, isError = false) {
+      msg.textContent = text;
+      msg.className = `text-[0.82rem] text-center px-4 py-2.5 rounded-xl ${
+        isError
+          ? 'bg-red-50 text-red-600 border border-red-100'
+          : 'bg-sage-light text-sage border border-sage/20'
+      }`;
+      msg.classList.remove('hidden');
+    }
+
+    function setLoading(loading) {
+      submitBtn.disabled = loading;
+      btnText.textContent = loading ? 'Creating account…' : 'Create Account';
+      btnSpinner.classList.toggle('hidden', !loading);
+    }
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      msg.classList.add('hidden');
+      setLoading(true);
+      try {
+        const body = Object.fromEntries(new FormData(form));
+        await api('/auth/register', { method: 'POST', body: JSON.stringify(body) });
+        showMsg('Account created successfully! Redirecting to login…');
+        form.reset();
+        setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+      } catch (err) {
+        showMsg(err.message || 'Something went wrong. Please try again.', true);
+      } finally {
+        setLoading(false);
+      }
+    };
+  </script>
+</body>
+</html>

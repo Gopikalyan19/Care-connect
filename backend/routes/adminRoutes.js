@@ -1,0 +1,12 @@
+import express from 'express';
+import { verifyToken } from '../middleware/authMiddleware.js';
+import { requireRole } from '../middleware/roleMiddleware.js';
+import { getAllRequests, assignRequest, updateRequestStatus, getAllUsers, getAnalytics } from '../controllers/adminController.js';
+const router = express.Router();
+router.use(verifyToken, requireRole('admin'));
+router.get('/requests', getAllRequests);
+router.get('/users', getAllUsers);
+router.get('/analytics', getAnalytics);
+router.put('/assign-request/:id', assignRequest);
+router.put('/update-status/:id', updateRequestStatus);
+export default router;
